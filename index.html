@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rahma Ceram | Céramique artisanale</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+        <header>
+            <h1>🏺 Rahma Ceram</h1>
+            <p>Céramiques artisanales faites avec amour</p>
+        </header>
+
+        <!-- =========================
+             CONTENU PRINCIPAL
+        ========================== -->
+        <main>
+
+            <!-- =========================
+                 FORMULAIRE
+            ========================== -->
+            <section class="form-section">
+                <div class="form-header">
+                    <h2>Passer une commande</h2>
+                    <p>Choisissez un produit, puis remplissez vos coordonnées.</p>
+                </div>
+
+                <!--
+                    ENDPOINT FORMSPREE :
+                    https://formspree.io/f/mnpnkevr
+                -->
+                <form id="orderForm"
+                      action="https://formspree.io/f/mnpnkevr"
+                      method="POST">
+
+                    <!-- Sujet affiché dans l'email reçu -->
+                    <input type="hidden"
+                           name="_subject"
+                           value="Nouvelle commande - Rahma Ceram">
+
+                    <!-- Source de la commande -->
+                    <input type="hidden"
+                           name="source"
+                           value="Site web Rahma Ceram">
+
+                    <!-- Nom -->
+                    <div class="input-group">
+                        <input type="text"
+                               id="nom"
+                               name="nom"
+                               placeholder=" "
+                               required>
+
+                        <label for="nom">Nom complet</label>
+
+                        <span class="error-message" id="nomError"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder=" "
+                               required>
+
+                        <label for="email">Adresse email</label>
+
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div class="input-group">
+                        <input type="tel"
+                               id="telephone"
+                               name="telephone"
+                               placeholder=" "
+                               required>
+
+                        <label for="telephone">Numéro de téléphone</label>
+
+                        <span class="error-message" id="telephoneError"></span>
+                    </div>
+
+                    <!-- Wilaya -->
+                    <div class="input-group">
+                        <select id="wilaya" name="wilaya" required>
+                            <option value="" selected disabled></option>
+
+                            <option value="01 - Adrar">01 - Adrar</option>
+                            <option value="02 - Chlef">02 - Chlef</option>
+                            <option value="03 - Laghouat">03 - Laghouat</option>
+                            <option value="04 - Oum El Bouaghi">04 - Oum El Bouaghi</option>
+                            <option value="05 - Batna">05 - Batna</option>
+                            <option value="06 - Béjaïa">06 - Béjaïa</option>
+                            <option value="07 - Biskra">07 - Biskra</option>
+                            <option value="08 - Béchar">08 - Béchar</option>
+                            <option value="09 - Blida">09 - Blida</option>
+                            <option value="10 - Bouira">10 - Bouira</option>
+                            <option value="11 - Tamanrasset">11 - Tamanrasset</option>
+                            <option value="12 - Tébessa">12 - Tébessa</option>
+                            <option value="13 - Tlemcen">13 - Tlemcen</option>
+                            <option value="14 - Tiaret">14 - Tiaret</option>
+                            <option value="15 - Tizi Ouzou">15 - Tizi Ouzou</option>
+                            <option value="16 - Alger">16 - Alger</option>
+                            <option value="17 - Djelfa">17 - Djelfa</option>
+                            <option value="18 - Jijel">18 - Jijel</option>
+                            <option value="19 - Sétif">19 - Sétif</option>
+                            <option value="20 - Saïda">20 - Saïda</option>
+                            <option value="21 - Skikda">21 - Skikda</option>
+                            <option value="22 - Sidi Bel Abbès">22 - Sidi Bel Abbès</option>
+                            <option value="23 - Annaba">23 - Annaba</option>
+                            <option value="24 - Guelma">24 - Guelma</option>
+                            <option value="25 - Constantine">25 - Constantine</option>
+                            <option value="26 - Médéa">26 - Médéa</option>
+                            <option value="27 - Mostaganem">27 - Mostaganem</option>
+                            <option value="28 - M'Sila">28 - M'Sila</option>
+                            <option value="29 - Mascara">29 - Mascara</option>
+                            <option value="30 - Ouargla">30 - Ouargla</option>
+                            <option value="31 - Oran">31 - Oran</option>
+                            <option value="32 - El Bayadh">32 - El Bayadh</option>
+                            <option value="33 - Illizi">33 - Illizi</option>
+                            <option value="34 - Bordj Bou Arreridj">34 - Bordj Bou Arreridj</option>
+                            <option value="35 - Boumerdès">35 - Boumerdès</option>
+                            <option value="36 - El Tarf">36 - El Tarf</option>
+                            <option value="37 - Tindouf">37 - Tindouf</option>
+                            <option value="38 - Tissemsilt">38 - Tissemsilt</option>
+                            <option value="39 - El Oued">39 - El Oued</option>
+                            <option value="40 - Khenchela">40 - Khenchela</option>
+                            <option value="41 - Souk Ahras">41 - Souk Ahras</option>
+                            <option value="42 - Tipaza">42 - Tipaza</option>
+                            <option value="43 - Mila">43 - Mila</option>
+                            <option value="44 - Aïn Defla">44 - Aïn Defla</option>
+                            <option value="45 - Naâma">45 - Naâma</option>
+                            <option value="46 - Aïn Témouchent">46 - Aïn Témouchent</option>
+                            <option value="47 - Ghardaïa">47 - Ghardaïa</option>
+                            <option value="48 - Relizane">48 - Relizane</option>
+                            <option value="49 - Timimoun">49 - Timimoun</option>
+                            <option value="50 - Bordj Badji Mokhtar">50 - Bordj Badji Mokhtar</option>
+                            <option value="51 - Ouled Djellal">51 - Ouled Djellal</option>
+                            <option value="52 - Béni Abbès">52 - Béni Abbès</option>
+                            <option value="53 - In Salah">53 - In Salah</option>
+                            <option value="54 - In Guezzam">54 - In Guezzam</option>
+                            <option value="55 - Touggourt">55 - Touggourt</option>
+                            <option value="56 - Djanet">56 - Djanet</option>
+                            <option value="57 - El M'Ghair">57 - El M'Ghair</option>
+                            <option value="58 - El Meniaa">58 - El Meniaa</option>
+                        </select>
+
+                        <label for="wilaya">Wilaya</label>
+
+                        <span class="error-message" id="wilayaError"></span>
+                    </div>
+
+                    <!-- Produit -->
+                    <div class="input-group">
+                        <input type="text"
+                               id="produit"
+                               name="produit"
+                               placeholder=" "
+                               required
+                               readonly>
+
+                        <label for="produit">Produit choisi</label>
+
+                        <span class="input-hint">
+                            👆 Cliquez sur « Voir détails », puis sur « Commander ce produit ».
+                        </span>
+
+                        <span class="error-message" id="produitError"></span>
+                    </div>
+
+                    <!-- Quantité -->
+                    <div class="input-group">
+                        <input type="number"
+                               id="quantite"
+                               name="quantite"
+                               placeholder=" "
+                               value="1"
+                               min="1"
+                               required>
+
+                        <label for="quantite">Quantité</label>
+
+                        <span class="error-message" id="quantiteError"></span>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="input-group">
+                        <textarea id="message"
+                                  name="message"
+                                  placeholder=" "
+                                  rows="5"></textarea>
+
+                        <label for="message">Message / Couleur / Détails</label>
+
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+
+                    <!-- Bouton envoyer -->
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Envoyer ma commande</span>
+                        <span class="btn-loading">Envoi en cours...</span>
+                        <span class="btn-icon">🚀</span>
+                    </button>
+
+                    <!-- Message succès -->
+                    <div id="successMessage" class="success-message">
+                        <div class="success-icon">✅</div>
+                        <p>
+                            Votre commande a été envoyée avec succès.<br>
+                            Nous vous contacterons bientôt.
+                        </p>
+                    </div>
+
+                    <!-- Message erreur général -->
+                    <div id="formErrorMessage" class="form-error-message"></div>
+                </form>
+            </section>
+
+            <!-- =========================
+                 PRODUITS
+            ========================== -->
+            <section class="products-preview">
+                <div class="section-header">
+                    <h2>Nos créations</h2>
+                    <p>Cliquez sur une carte pour voir les détails du produit.</p>
+                </div>
+
+                <div class="product-grid">
+
+                    <!-- Produit 1 -->
+                    <article class="product-card"
+                             data-product="Vase décoratif traditionnel"
+                             data-prix="2500 DA"
+                             data-description="Vase en céramique fabriqué à la main avec motifs traditionnels. Disponible selon les couleurs en stock."
+                             data-delai="3 à 5 jours ouvrables">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">🏺</div>
+                            <span class="product-badge">Nouveau</span>
+                        </div>
+
+                        <h3>Vase décoratif</h3>
+                        <p class="product-price">2 500 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+
+                    <!-- Produit 2 -->
+                    <article class="product-card"
+                             data-product="Plat de service familial"
+                             data-prix="3200 DA"
+                             data-description="Grand plat en céramique pour les repas de famille, couscous, tajines ou présentation de gâteaux."
+                             data-delai="3 à 5 jours ouvrables">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">🍽️</div>
+                        </div>
+
+                        <h3>Plat de service</h3>
+                        <p class="product-price">3 200 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+
+                    <!-- Produit 3 -->
+                    <article class="product-card"
+                             data-product="Service à thé complet"
+                             data-prix="4500 DA"
+                             data-description="Service traditionnel composé d'une théière et de six tasses avec décoration artisanale."
+                             data-delai="5 à 7 jours ouvrables">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">☕</div>
+                            <span class="product-badge bestseller">Populaire</span>
+                        </div>
+
+                        <h3>Service à thé</h3>
+                        <p class="product-price">4 500 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+
+                    <!-- Produit 4 -->
+                    <article class="product-card"
+                             data-product="Pot de fleurs décoratif"
+                             data-prix="1800 DA"
+                             data-description="Pot décoratif avec motifs géométriques, idéal pour les plantes d'intérieur et les petits jardins."
+                             data-delai="2 à 4 jours ouvrables">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">🌿</div>
+                        </div>
+
+                        <h3>Pot de fleurs</h3>
+                        <p class="product-price">1 800 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+        <footer>
+            <div class="footer-content">
+                <p>© 2026 Rahma Ceram</p>
+                <p>Céramiques artisanales algériennes</p>
+
+                <div class="footer-contact">
+                    <span>📞 05 50 XX XX XX</span>
+                    <span>📧 contact@rahmaceram.com</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- =========================
+         POPUP DÉTAIL PRODUIT
+    ========================== -->
+    <div id="productModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true">
+
+            <button type="button"
+                    class="close-modal"
+                    aria-label="Fermer la fenêtre">
+                ×
+            </button>
+
+            <div class="modal-header">
+                <div id="modalProductImage" class="modal-image">🏺</div>
+                <h2 id="modalProductName">Nom du produit</h2>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="modal-info">
+
+                    <div class="info-item">
+                        <div class="info-icon">💰</div>
+
+                        <div>
+                            <strong>Prix</strong>
+                            <p id="modalProductPrice">0 DA</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📝</div>
+
+                        <div>
+                            <strong>Description</strong>
+                            <p id="modalProductDesc">Description du produit</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">⏱️</div>
+
+                        <div>
+                            <strong>Délai de fabrication</strong>
+                            <p id="modalProductDelai">À confirmer</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button"
+                            id="btnOrderProduct"
+                            class="btn-order">
+                        ✅ Commander ce produit
+                    </button>
+
+                    <button type="button" class="btn-close">
+                        Fermer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
