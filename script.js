@@ -8,11 +8,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const produitInput = document.getElementById("produit");
     const nomInput = document.getElementById("nom");
 
+    const wilayaSelect = document.getElementById("wilaya");
+    const dairaSelect = document.getElementById("daira");
+    const dairaHint = document.getElementById("dairaHint");
+
     const modalProductImage = document.getElementById("modalProductImage");
+    const modalZoomHint = document.getElementById("modalZoomHint");
     const modalProductName = document.getElementById("modalProductName");
     const modalProductPrice = document.getElementById("modalProductPrice");
     const modalProductDesc = document.getElementById("modalProductDesc");
     const modalProductDelai = document.getElementById("modalProductDelai");
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxClose = document.querySelector(".lightbox-close");
 
     const closeModalButton = document.querySelector(".close-modal");
     const closeButton = document.querySelector(".btn-close");
@@ -31,18 +40,65 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedProduct = null;
 
     /* ========================================
+       WILAYA -> DAIRA
+       Les données sont dans dairas.js
+       ======================================== */
+    function fillDairas() {
+        // La valeur de la wilaya commence par son code : "19 - Sétif" -> "19"
+        const code = wilayaSelect.value.slice(0, 2);
+        const list = (typeof DAIRAS !== "undefined" && DAIRAS[code]) || [];
+
+        dairaSelect.innerHTML = "";
+
+        const emptyOption = new Option("", "", true, true);
+        emptyOption.disabled = true;
+        dairaSelect.add(emptyOption);
+
+        list.forEach((name) => {
+            dairaSelect.add(new Option(name, name));
+        });
+
+        dairaSelect.disabled = list.length === 0;
+        dairaHint.style.display = list.length === 0 ? "block" : "none";
+
+        clearError(dairaSelect);
+    }
+
+    wilayaSelect.addEventListener("change", fillDairas);
+
+    /* ========================================
        OUVRIR LE POPUP
        ======================================== */
     function openModal(card) {
+        const photo = card.querySelector(".product-image img");
+
         selectedProduct = {
-            image: card.querySelector(".product-image")?.textContent.trim() || "🛍️",
+            imageSrc: photo ? photo.getAttribute("src") : null,
+            imageAlt: photo ? photo.getAttribute("alt") || "" : "",
+            emoji: card.querySelector(".product-image")?.textContent.trim() || "🛍️",
             name: card.dataset.product || "Produit",
             price: card.dataset.prix || "Prix non disponible",
             description: card.dataset.description || "Aucune description disponible.",
             delai: card.dataset.delai || "À confirmer"
         };
 
-        modalProductImage.textContent = selectedProduct.image;
+        /* Image du produit (photo du dossier img, sinon emoji) */
+        modalProductImage.textContent = "";
+
+        if (selectedProduct.imageSrc) {
+            const img = document.createElement("img");
+            img.src = selectedProduct.imageSrc;
+            img.alt = selectedProduct.imageAlt;
+
+            modalProductImage.appendChild(img);
+            modalProductImage.classList.add("has-photo");
+            modalZoomHint.style.display = "block";
+        } else {
+            modalProductImage.textContent = selectedProduct.emoji;
+            modalProductImage.classList.remove("has-photo");
+            modalZoomHint.style.display = "none";
+        }
+
         modalProductName.textContent = selectedProduct.name;
         modalProductPrice.textContent = selectedProduct.price;
         modalProductDesc.textContent = selectedProduct.description;
@@ -63,6 +119,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.body.style.overflow = "";
     }
+
+    /* ========================================
+       AGRANDIR L'IMAGE (LIGHTBOX)
+       ======================================== */
+    function openLightbox() {
+        if (!selectedProduct || !selectedProduct.imageSrc) {
+            return;
+        }
+
+        lightboxImg.src = selectedProduct.imageSrc;
+        lightboxImg.alt = selectedProduct.imageAlt;
+
+        lightbox.style.display = "flex";
+        lightbox.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = "none";
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+    }
+
+    modalProductImage.addEventListener("click", () => {
+        if (modalProductImage.classList.contains("has-photo")) {
+            openLightbox();
+        }
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+        // Clic sur le fond noir (pas sur l'image) = fermer
+        if (event.target !== lightboxImg) {
+            closeLightbox();
+        }
+    });
 
     /* ========================================
        CLIC SUR LES PRODUITS
@@ -101,7 +193,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && modal.style.display === "flex") {
+        if (event.key !== "Escape") {
+            return;
+        }
+
+        // Escape ferme d'abord l'image agrandie, puis le popup
+        if (lightbox.style.display === "flex") {
+            closeLightbox();
+            return;
+        }
+
+        if (modal.style.display === "flex") {
             closeModal();
         }
     });
@@ -150,6 +252,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function validateField(field) {
+        // Champ désactivé (ex : daira avant le choix de la wilaya) : ignoré
+        if (field.disabled) {
+            return true;
+        }
+
         const value = field.value.trim();
 
         if (field.required && value === "") {
@@ -282,6 +389,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 produitInput.value = "";
                 selectedProduct = null;
+
+                /* Remettre la daira à zéro (liste vide + désactivée) */
+                fillDairas();
 
                 successMessage.style.display = "block";
 

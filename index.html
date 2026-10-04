@@ -17,14 +17,78 @@
              HEADER
         ========================== -->
         <header>
-            <h1>🏺 Rahma Ceram</h1>
-            <p>Céramiques artisanales faites avec amour</p>
+            <h1>K.N.D Store</h1>
+            <p>مرحبا بكم</p>
         </header>
 
         <!-- =========================
              CONTENU PRINCIPAL
         ========================== -->
         <main>
+
+            <!-- =========================
+                 PRODUITS
+            ========================== -->
+            <section class="products-preview">
+                <div class="section-header">
+                    <h2>منتجاتنا</h2>
+                    <p>Cliquez sur une carte pour voir les détails du produit.</p>
+                </div>
+
+                <div class="product-grid">
+
+                    <!-- Produit 1 -->
+                    <article class="product-card"
+                             data-product="حذاء من الجلد الطبيعي"
+                             data-prix="3500 DA"
+                             data-description="حذاء من الجلد الطبيعي وفراش طبي لجميع المناسبات"
+                             data-delai="قياس 41 فقط">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">
+                                <img src="img/dustin.jpeg" alt="CHAUSSURES DUSTIN">
+                            </div>
+                            <span class="product-badge">Nouveau</span>
+                        </div>
+
+                        <h3>حذاء من الجلد الطبيعي</h3>
+                        <p class="product-price">3 500 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+ <!-- Produit 1 -->
+                    <article class="product-card"
+                             data-product="حذاء من الجلد الطبيعي"
+                             data-prix="3500 DA"
+                             data-description="حذاء من الجلد الطبيعي وفراش طبي لجميع المناسبات"
+                             data-delai="قياس 41 فقط">
+
+                        <div class="product-image-wrapper">
+                            <div class="product-image">
+                                <img src="img/dustin.jpeg" alt="CHAUSSURES DUSTIN">
+                            </div>
+                            <span class="product-badge">Nouveau</span>
+                        </div>
+
+                        <h3>حذاء من الجلد الطبيعي</h3>
+                        <p class="product-price">3 500 DA</p>
+
+                        <button type="button" class="btn-view">
+                            Voir détails
+                        </button>
+                    </article>
+                    <!--
+                        POUR AJOUTER UN PRODUIT :
+                        1) Copie l'image dans le dossier img/
+                        2) Copie le bloc <article> ci-dessus
+                        3) Change data-product, data-prix, data-description,
+                           data-delai, le src de l'image, le <h3> et le prix.
+                    -->
+
+                </div>
+            </section>
 
             <!-- =========================
                  FORMULAIRE
@@ -162,6 +226,21 @@
                         <span class="error-message" id="wilayaError"></span>
                     </div>
 
+                    <!-- Daira (remplie automatiquement selon la wilaya) -->
+                    <div class="input-group">
+                        <select id="daira" name="daira" required disabled>
+                            <option value="" selected disabled></option>
+                        </select>
+
+                        <label for="daira">Daïra</label>
+
+                        <span class="input-hint" id="dairaHint">
+                            Choisissez d'abord la wilaya.
+                        </span>
+
+                        <span class="error-message" id="dairaError"></span>
+                    </div>
+
                     <!-- Produit -->
                     <div class="input-group">
                         <input type="text"
@@ -227,98 +306,6 @@
                     <div id="formErrorMessage" class="form-error-message"></div>
                 </form>
             </section>
-
-            <!-- =========================
-                 PRODUITS
-            ========================== -->
-            <section class="products-preview">
-                <div class="section-header">
-                    <h2>Nos créations</h2>
-                    <p>Cliquez sur une carte pour voir les détails du produit.</p>
-                </div>
-
-                <div class="product-grid">
-
-                    <!-- Produit 1 -->
-                    <article class="product-card"
-                             data-product="Vase décoratif traditionnel"
-                             data-prix="2500 DA"
-                             data-description="Vase en céramique fabriqué à la main avec motifs traditionnels. Disponible selon les couleurs en stock."
-                             data-delai="3 à 5 jours ouvrables">
-
-                        <div class="product-image-wrapper">
-                            <div class="product-image">🏺</div>
-                            <span class="product-badge">Nouveau</span>
-                        </div>
-
-                        <h3>Vase décoratif</h3>
-                        <p class="product-price">2 500 DA</p>
-
-                        <button type="button" class="btn-view">
-                            Voir détails
-                        </button>
-                    </article>
-
-                    <!-- Produit 2 -->
-                    <article class="product-card"
-                             data-product="Plat de service familial"
-                             data-prix="3200 DA"
-                             data-description="Grand plat en céramique pour les repas de famille, couscous, tajines ou présentation de gâteaux."
-                             data-delai="3 à 5 jours ouvrables">
-
-                        <div class="product-image-wrapper">
-                            <div class="product-image">🍽️</div>
-                        </div>
-
-                        <h3>Plat de service</h3>
-                        <p class="product-price">3 200 DA</p>
-
-                        <button type="button" class="btn-view">
-                            Voir détails
-                        </button>
-                    </article>
-
-                    <!-- Produit 3 -->
-                    <article class="product-card"
-                             data-product="Service à thé complet"
-                             data-prix="4500 DA"
-                             data-description="Service traditionnel composé d'une théière et de six tasses avec décoration artisanale."
-                             data-delai="5 à 7 jours ouvrables">
-
-                        <div class="product-image-wrapper">
-                            <div class="product-image">☕</div>
-                            <span class="product-badge bestseller">Populaire</span>
-                        </div>
-
-                        <h3>Service à thé</h3>
-                        <p class="product-price">4 500 DA</p>
-
-                        <button type="button" class="btn-view">
-                            Voir détails
-                        </button>
-                    </article>
-
-                    <!-- Produit 4 -->
-                    <article class="product-card"
-                             data-product="Pot de fleurs décoratif"
-                             data-prix="1800 DA"
-                             data-description="Pot décoratif avec motifs géométriques, idéal pour les plantes d'intérieur et les petits jardins."
-                             data-delai="2 à 4 jours ouvrables">
-
-                        <div class="product-image-wrapper">
-                            <div class="product-image">🌿</div>
-                        </div>
-
-                        <h3>Pot de fleurs</h3>
-                        <p class="product-price">1 800 DA</p>
-
-                        <button type="button" class="btn-view">
-                            Voir détails
-                        </button>
-                    </article>
-
-                </div>
-            </section>
         </main>
 
         <!-- =========================
@@ -326,12 +313,12 @@
         ========================== -->
         <footer>
             <div class="footer-content">
-                <p>© 2026 Rahma Ceram</p>
+                <p>© 2026 K.N.D </p>
                 <p>Céramiques artisanales algériennes</p>
 
                 <div class="footer-contact">
-                    <span>📞 05 50 XX XX XX</span>
-                    <span>📧 contact@rahmaceram.com</span>
+                    <span>📞 05 62 59 69 41</span>
+                    <span>📧 karimKND@gmail.com</span>
                 </div>
             </div>
         </footer>
@@ -350,7 +337,9 @@
             </button>
 
             <div class="modal-header">
+                <!-- Rempli par script.js : photo du produit (ou emoji) -->
                 <div id="modalProductImage" class="modal-image">🏺</div>
+                <p id="modalZoomHint" class="zoom-hint">🔍 Cliquez sur l'image pour l'agrandir</p>
                 <h2 id="modalProductName">Nom du produit</h2>
             </div>
 
@@ -380,7 +369,7 @@
                         <div class="info-icon">⏱️</div>
 
                         <div>
-                            <strong>Délai de fabrication</strong>
+                            <strong>Détails</strong>
                             <p id="modalProductDelai">À confirmer</p>
                         </div>
                     </div>
@@ -402,6 +391,15 @@
         </div>
     </div>
 
+    <!-- =========================
+         IMAGE AGRANDIE (LIGHTBOX)
+    ========================== -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button type="button" class="lightbox-close" aria-label="Fermer l'image">×</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script src="dairas.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
