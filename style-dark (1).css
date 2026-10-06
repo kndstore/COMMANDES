@@ -1,0 +1,273 @@
+/* ========================================================
+   MODE SOMBRE
+   À charger EN DERNIER (après style-form.css).
+   Le mode est activé par l'attribut data-theme="dark"
+   que theme.js place sur <html>.
+   ======================================================== */
+
+/* ========================================
+   BOUTON SOLEIL / LUNE (visible dans les 2 modes)
+   ======================================== */
+.theme-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 1500;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    font-size: 1.25rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(18deg) scale(1.08);
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        top: 12px;
+        right: 12px;
+
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* ========================================
+   VARIABLES SOMBRES
+   ======================================== */
+:root[data-theme="dark"] {
+    color-scheme: dark;   /* listes, scrollbars et champs natifs en sombre */
+
+    --primary: #8b7cf6;
+    --primary-dark: #7567e0;
+    --dark: #f3f4f6;
+    --text: #d1d5db;
+    --text-light: #9ca3af;
+    --border: #374151;
+    --error: #f87171;
+}
+
+/* ========================================
+   FOND ET CONTENEUR
+   ======================================== */
+:root[data-theme="dark"] body {
+    background-image: linear-gradient(-45deg, #0b1020, #1e1b4b, #2e1065, #3b0764);
+}
+
+:root[data-theme="dark"] .container {
+    background: rgba(15, 23, 42, 0.92);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+   FORMULAIRE
+   ======================================== */
+:root[data-theme="dark"] .form-section {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .form-header h2 {
+    background-image: linear-gradient(135deg, #a5b4fc, #c4b5fd, #f0abfc);
+}
+
+:root[data-theme="dark"] .input-group input,
+:root[data-theme="dark"] .input-group select,
+:root[data-theme="dark"] .input-group textarea {
+    color: var(--dark);
+
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .input-group input:hover,
+:root[data-theme="dark"] .input-group select:hover,
+:root[data-theme="dark"] .input-group textarea:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .input-group input:focus,
+:root[data-theme="dark"] .input-group select:focus,
+:root[data-theme="dark"] .input-group textarea:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+
+    box-shadow: 0 0 0 4px rgba(139, 124, 246, 0.22),
+        0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .input-group input[readonly] {
+    background-image: none;
+    background-color: rgba(139, 124, 246, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(139, 124, 246, 0.4);
+}
+
+:root[data-theme="dark"] .input-group select:disabled {
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Flèche des listes en violet clair */
+:root[data-theme="dark"] .input-group select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+/* Options de la liste déroulante */
+:root[data-theme="dark"] .input-group select option {
+    color: #f3f4f6;
+    background: #1e293b;
+}
+
+/* Remplissage automatique du navigateur */
+:root[data-theme="dark"] .input-group input:-webkit-autofill,
+:root[data-theme="dark"] .input-group textarea:-webkit-autofill {
+    -webkit-text-fill-color: #f3f4f6;
+    box-shadow: 0 0 0 1000px #1e293b inset;
+    caret-color: #f3f4f6;
+}
+
+:root[data-theme="dark"] .success-message {
+    color: #86efac;
+
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(134, 239, 172, 0.3);
+}
+
+:root[data-theme="dark"] .form-error-message {
+    color: #fca5a5;
+
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(252, 165, 165, 0.3);
+}
+
+/* ========================================
+   PRODUITS
+   ======================================== */
+:root[data-theme="dark"] .products-preview {
+    background: rgba(30, 41, 59, 0.7);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme="dark"] .product-card {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.08);
+
+    box-shadow: 0 6px 17px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme="dark"] .product-card:hover {
+    border-color: rgba(139, 124, 246, 0.55);
+    box-shadow: 0 14px 28px rgba(139, 124, 246, 0.25);
+}
+
+/* Photo à fond clair : coins arrondis pour bien la détacher */
+:root[data-theme="dark"] .product-image img {
+    border-radius: 12px;
+}
+
+:root[data-theme="dark"] .btn-view {
+    color: #c4b5fd;
+
+    background: rgba(139, 124, 246, 0.15);
+    border-color: rgba(139, 124, 246, 0.35);
+}
+
+:root[data-theme="dark"] .btn-view:hover {
+    color: #ffffff;
+
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+/* ========================================
+   POPUP PRODUIT
+   ======================================== */
+:root[data-theme="dark"] .modal {
+    background: rgba(2, 6, 23, 0.8);
+}
+
+:root[data-theme="dark"] .modal-content {
+    background: #1e293b;
+
+    box-shadow: 0 25px 75px rgba(0, 0, 0, 0.7);
+}
+
+:root[data-theme="dark"] .modal-content::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+:root[data-theme="dark"] .info-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .info-icon {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+}
+
+:root[data-theme="dark"] .info-item strong {
+    color: #c4b5fd;
+}
+
+:root[data-theme="dark"] .btn-close {
+    color: var(--text);
+
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+:root[data-theme="dark"] .btn-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ========================================
+   CORRECTIF : flèche des listes (wilaya / daïra)
+   Le "background:" de style-form.css au survol et au focus
+   effaçait la flèche ou la répétait en mosaïque.
+   On la redéfinit pour tous les états.
+   ======================================== */
+:root {
+    --select-arrow: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236c5ce7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+:root[data-theme="dark"] {
+    --select-arrow: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23a78bfa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+}
+
+.input-group select,
+.input-group select:hover,
+.input-group select:focus,
+.input-group select:disabled {
+    background-image: var(--select-arrow);
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 18px 18px;
+}
