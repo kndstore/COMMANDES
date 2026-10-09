@@ -12,12 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const dairaSelect = document.getElementById("daira");
     const dairaHint = document.getElementById("dairaHint");
 
+    const pointureSelect = document.getElementById("pointure");
+    const couleurSelect = document.getElementById("couleur");
+
     const modalProductImage = document.getElementById("modalProductImage");
     const modalZoomHint = document.getElementById("modalZoomHint");
     const modalProductName = document.getElementById("modalProductName");
     const modalProductPrice = document.getElementById("modalProductPrice");
     const modalProductDesc = document.getElementById("modalProductDesc");
     const modalProductDelai = document.getElementById("modalProductDelai");
+    const modalProductPointures = document.getElementById("modalProductPointures");
+    const modalProductCouleurs = document.getElementById("modalProductCouleurs");
 
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightboxImg");
@@ -38,6 +43,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const fields = form.querySelectorAll("input, select, textarea");
 
     let selectedProduct = null;
+    let modalSelectedPointure = null;
+    let modalSelectedCouleur = null;
+
+    const DEFAULT_POINTURES = ["39", "40", "41", "42", "43", "44", "45"];
+    const DEFAULT_COULEURS = [
+        "Noir",
+        "Marron",
+        "Camel",
+        "Bleu marine",
+        "Autre"
+    ];
+
+    function getColorCode(colorName) {
+        const lower = colorName.toLowerCase();
+        if (lower.includes("noir") || lower.includes("أسود")) return "#1e293b";
+        if (lower.includes("marron") || lower.includes("بني")) return "#6d3916";
+        if (lower.includes("camel") || lower.includes("هافان")) return "#b46927";
+        if (lower.includes("bleu") || lower.includes("أزرق")) return "#1d4ed8";
+        if (lower.includes("gris") || lower.includes("رمادي")) return "#64748b";
+        if (lower.includes("blanc") || lower.includes("أبيض")) return "#f8fafc";
+        if (lower.includes("bordeaux") || lower.includes("عنابي")) return "#831843";
+        return null;
+    }
+
+    function populateSelectOptions(selectEl, items, selectedValue) {
+        if (!selectEl) return;
+        const currentVal = selectedValue !== undefined ? selectedValue : selectEl.value;
+        selectEl.innerHTML = "";
+
+        const emptyOption = new Option("", "", true, true);
+        emptyOption.disabled = true;
+        selectEl.add(emptyOption);
+
+        items.forEach((item) => {
+            const opt = new Option(item, item);
+            selectEl.add(opt);
+        });
+
+        if (currentVal && items.includes(currentVal)) {
+            selectEl.value = currentVal;
+        } else if (items.length === 1) {
+            selectEl.value = items[0];
+        } else {
+            selectEl.value = "";
+        }
+    }
 
     /* ========================================
        WILAYA -> DAIRA
@@ -72,6 +123,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function openModal(card) {
         const photo = card.querySelector(".product-image img");
 
+        const cardPointures = card.dataset.pointures
+            ? card.dataset.pointures.split(",").map(s => s.trim()).filter(Boolean)
+            : DEFAULT_POINTURES;
+
+        const cardCouleurs = card.dataset.couleurs
+            ? card.dataset.couleurs.split(",").map(c => c.trim()).filter(Boolean)
+            : DEFAULT_COULEURS;
+
         selectedProduct = {
             imageSrc: photo ? photo.getAttribute("src") : null,
             imageAlt: photo ? photo.getAttribute("alt") || "" : "",
@@ -79,7 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
             name: card.dataset.product || "Produit",
             price: card.dataset.prix || "Prix non disponible",
             description: card.dataset.description || "Aucune description disponible.",
-            delai: card.dataset.delai || "À confirmer"
+            delai: card.dataset.delai || "À confirmer",
+            pointures: cardPointures,
+            couleurs: cardCouleurs
         };
 
         /* Image du produit (photo du dossier img, sinon emoji) */
@@ -103,6 +164,62 @@ document.addEventListener("DOMContentLoaded", () => {
         modalProductPrice.textContent = selectedProduct.price;
         modalProductDesc.textContent = selectedProduct.description;
         modalProductDelai.textContent = selectedProduct.delai;
+
+        /* Rendu interactif des pointures dans la modale */
+        modalSelectedPointure = cardPointures.length === 1 ? cardPointures[0] : null;
+        if (modalProductPointures) {
+            modalProductPointures.innerHTML = "";
+            cardPointures.forEach((pt) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "option-pill" + (pt === modalSelectedPointure ? " active" : "");
+                btn.textContent = pt;
+                btn.addEventListener("click", () => {
+                    modalProductPointures.querySelectorAll(".option-pill").forEach(p => p.classList.remove("active"));
+                    if (modalSelectedPointure === pt && cardPointures.length > 1) {
+                        modalSelectedPointure = null;
+                    } else {
+                        btn.classList.add("active");
+                        modalSelectedPointure = pt;
+                    }
+                });
+                modalProductPointures.appendChild(btn);
+            });
+        }
+
+        /* Rendu interactif des couleurs dans la modale */
+        modalSelectedCouleur = cardCouleurs.length === 1 ? cardCouleurs[0] : null;
+        if (modalProductCouleurs) {
+            modalProductCouleurs.innerHTML = "";
+            cardCouleurs.forEach((clr) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "option-pill" + (clr === modalSelectedCouleur ? " active" : "");
+
+                const dotColor = getColorCode(clr);
+                if (dotColor) {
+                    const dot = document.createElement("span");
+                    dot.className = "color-dot";
+                    dot.style.backgroundColor = dotColor;
+                    btn.appendChild(dot);
+                }
+
+                const label = document.createElement("span");
+                label.textContent = clr;
+                btn.appendChild(label);
+
+                btn.addEventListener("click", () => {
+                    modalProductCouleurs.querySelectorAll(".option-pill").forEach(p => p.classList.remove("active"));
+                    if (modalSelectedCouleur === clr && cardCouleurs.length > 1) {
+                        modalSelectedCouleur = null;
+                    } else {
+                        btn.classList.add("active");
+                        modalSelectedCouleur = clr;
+                    }
+                });
+                modalProductCouleurs.appendChild(btn);
+            });
+        }
 
         modal.style.display = "flex";
         modal.setAttribute("aria-hidden", "false");
@@ -217,8 +334,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         produitInput.value = `${selectedProduct.name} - ${selectedProduct.price}`;
-
         clearError(produitInput);
+
+        /* Synchroniser la pointure */
+        populateSelectOptions(pointureSelect, selectedProduct.pointures, modalSelectedPointure);
+        if (pointureSelect && pointureSelect.value) {
+            clearError(pointureSelect);
+        }
+
+        /* Synchroniser la couleur */
+        populateSelectOptions(couleurSelect, selectedProduct.couleurs, modalSelectedCouleur);
+        if (couleurSelect && couleurSelect.value) {
+            clearError(couleurSelect);
+        }
 
         closeModal();
 
@@ -228,7 +356,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         setTimeout(() => {
-            nomInput.focus();
+            if (pointureSelect && !pointureSelect.value) {
+                pointureSelect.focus();
+            } else if (couleurSelect && !couleurSelect.value) {
+                couleurSelect.focus();
+            } else {
+                nomInput.focus();
+            }
         }, 500);
     });
 
@@ -261,6 +395,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (field.required && value === "") {
             showError(field, "Ce champ est obligatoire.");
+            return false;
+        }
+
+        if (field.name === "pointure" && field.required && value === "") {
+            showError(field, "Veuillez choisir une pointure.");
+            return false;
+        }
+
+        if (field.name === "couleur" && field.required && value === "") {
+            showError(field, "Veuillez choisir une couleur.");
             return false;
         }
 
@@ -389,6 +533,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 produitInput.value = "";
                 selectedProduct = null;
+                modalSelectedPointure = null;
+                modalSelectedCouleur = null;
+
+                populateSelectOptions(pointureSelect, DEFAULT_POINTURES, "");
+                populateSelectOptions(couleurSelect, DEFAULT_COULEURS, "");
 
                 /* Remettre la daira à zéro (liste vide + désactivée) */
                 fillDairas();
@@ -428,4 +577,8 @@ document.addEventListener("DOMContentLoaded", () => {
             buttonLoading.style.display = "none";
         }
     });
+
+    /* Initialiser les sélecteurs de pointure et couleur au chargement */
+    populateSelectOptions(pointureSelect, DEFAULT_POINTURES, "");
+    populateSelectOptions(couleurSelect, DEFAULT_COULEURS, "");
 });

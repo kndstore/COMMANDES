@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
     <!-- Google Fonts : Plus Jakarta Sans & Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Design System CSS -->
     <link rel="stylesheet" href="style.css">
@@ -26,7 +29,7 @@
              HEADER
         ========================== -->
         <header>
-            <div class="header-badge">✨ NOUVELLE COLLECTION 2026 • LIVRAISON 58 WILAYAS</div>
+            <div class="header-badge">✨ NOUVELLE COLLECTION 2026 </div>
             <h1>K.N.D Store</h1>
             <p>مرحباً بكم في متجرنا</p>
         </header>
@@ -42,17 +45,18 @@
             <section class="products-preview">
                 <div class="section-header">
                     <h2>منتجاتنا</h2>
-                    <p>Cliquez sur une image pour voir les détails du produit.</p>
+                    <p>  انقر على الصورة لعرض تفاصيل المنتج</p>
+                    <p>  Click on  image to see the product details</p>
+
+                
                 </div>
 
                 <div class="product-grid">
 
                     <!-- Produit 1 -->
-                    <article class="product-card"
-                             data-product="حذاء من الجلد الطبيعي"
-                             data-prix="3500 DA"
-                             data-description="حذاء من الجلد الطبيعي وفراش طبي لجميع المناسبات"
-                             data-delai="قياس 41 فقط">
+                    <article class="product-card" data-product="حذاء من الجلد الطبيعي" data-prix="3500 DA"
+                        data-description="حذاء من الجلد الطبيعي وفراش طبي لجميع المناسبات" data-delai="متوفر"
+                        data-pointures="41" data-couleurs="Noir">
 
                         <div class="product-image-wrapper">
                             <div class="product-image">
@@ -63,27 +67,35 @@
 
                         <h3>حذاء من الجلد الطبيعي</h3>
                         <p class="product-price">3 500 DA</p>
+
+                        <div class="product-features">
+                            <span class="feature-badge">👟 39 - 44</span>
+                            <span class="feature-badge">🎨 2 Couleurs</span>
+                        </div>
 
                         <button type="button" class="btn-view">
                             Voir détails
                         </button>
                     </article>
- <!-- Produit 1 -->
-                    <article class="product-card"
-                             data-product="حذاء من الجلد الطبيعي"
-                             data-prix="3500 DA"
-                             data-description="حذاء من الجلد الطبيعي وفراش طبي لجميع المناسبات"
-                             data-delai="قياس 41 فقط">
+                    <!-- Produit 2 -->
+                    <article class="product-card" data-product="حذاء كلاسيكي من الجلد الطبيعي" data-prix="3500 DA"
+                        data-description="حذاء كلاسيكي راقي من الجلد الطبيعي وفراش طبي مريح جداً" data-delai="متوفر"
+                        data-pointures="40, 41, 42, 43, 44" data-couleurs="Noir, Marron">
 
                         <div class="product-image-wrapper">
                             <div class="product-image">
                                 <img src="img/dustin.jpg" alt="CHAUSSURES DUSTIN">
                             </div>
-                            <span class="product-badge">Nouveau</span>
+                            <span class="product-badge">Populaire</span>
                         </div>
 
-                        <h3>حذاء من الجلد الطبيعي</h3>
-                        <p class="product-price">3 500 DA</p>
+                        <h3>حذاء كلاسيكي من الجلد الطبيعي</h3>
+                        <p class="product-price">3 700 DA</p>
+
+                        <div class="product-features">
+                            <span class="feature-badge">👟 40 - 44</span>
+                            <span class="feature-badge">🎨 Noir / Marron</span>
+                        </div>
 
                         <button type="button" class="btn-view">
                             Voir détails
@@ -93,7 +105,9 @@
                         POUR AJOUTER UN PRODUIT :
                         1) Copie l'image dans le dossier img/
                         2) Copie le bloc <article> ci-dessus
-                        3) Change data-product, data-prix, data-description,
+                        3) Modifie data-product, data-prix, data-description,
+                           data-pointures (ex: "39, 40, 41, 42, 43, 44"),
+                           data-couleurs (ex: "Noir, Marron, Camel"),
                            data-delai, le src de l'image, le <h3> et le prix.
                     -->
 
@@ -113,27 +127,17 @@
                     ENDPOINT FORMSPREE :
                     https://formspree.io/f/mnpnkevr
                 -->
-                <form id="orderForm"
-                      action="https://formspree.io/f/mnpnkevr"
-                      method="POST">
+                <form id="orderForm" action="https://formspree.io/f/mnpnkevr" method="POST">
 
                     <!-- Sujet affiché dans l'email reçu -->
-                    <input type="hidden"
-                           name="_subject"
-                           value="Nouvelle commande - Rahma Ceram">
+                    <input type="hidden" name="_subject" value="Nouvelle commande - K.N.D Store">
 
                     <!-- Source de la commande -->
-                    <input type="hidden"
-                           name="source"
-                           value="Site web Rahma Ceram">
+                    <input type="hidden" name="source" value="Site web K.N.D Store">
 
                     <!-- Nom -->
                     <div class="input-group">
-                        <input type="text"
-                               id="nom"
-                               name="nom"
-                               placeholder=" "
-                               required>
+                        <input type="text" id="nom" name="nom" placeholder=" " required>
 
                         <label for="nom">Nom complet</label>
 
@@ -142,11 +146,7 @@
 
                     <!-- Email -->
                     <div class="input-group">
-                        <input type="email"
-                               id="email"
-                               name="email"
-                               placeholder=" "
-                               required>
+                        <input type="email" id="email" name="email" placeholder=" " required>
 
                         <label for="email">Adresse email</label>
 
@@ -155,11 +155,7 @@
 
                     <!-- Téléphone -->
                     <div class="input-group">
-                        <input type="tel"
-                               id="telephone"
-                               name="telephone"
-                               placeholder=" "
-                               required>
+                        <input type="tel" id="telephone" name="telephone" placeholder=" " required>
 
                         <label for="telephone">Numéro de téléphone</label>
 
@@ -253,12 +249,7 @@
 
                     <!-- Produit -->
                     <div class="input-group">
-                        <input type="text"
-                               id="produit"
-                               name="produit"
-                               placeholder=" "
-                               required
-                               readonly>
+                        <input type="text" id="produit" name="produit" placeholder=" " required readonly>
 
                         <label for="produit">Produit choisi</label>
 
@@ -269,15 +260,43 @@
                         <span class="error-message" id="produitError"></span>
                     </div>
 
+                    <!-- Pointure -->
+                    <div class="input-group col-half">
+                        <select id="pointure" name="pointure" required>
+                            <option value="" selected disabled></option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                        </select>
+
+                        <label for="pointure">Pointure (المقاس)</label>
+
+                        <span class="error-message" id="pointureError"></span>
+                    </div>
+
+                    <!-- Couleur -->
+                    <div class="input-group col-half">
+                        <select id="couleur" name="couleur" required>
+                            <option value="" selected disabled></option>
+                            <option value="Noir">Noir (أسود)</option>
+                            <option value="Marron">Marron (بني)</option>
+                            <option value="Camel">Camel (هافان)</option>
+                            <option value="Bleu marine">Bleu marine (أزرق داكن)</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+
+                        <label for="couleur">Couleur (اللون)</label>
+
+                        <span class="error-message" id="couleurError"></span>
+                    </div>
+
                     <!-- Quantité -->
                     <div class="input-group">
-                        <input type="number"
-                               id="quantite"
-                               name="quantite"
-                               placeholder=" "
-                               value="1"
-                               min="1"
-                               required>
+                        <input type="number" id="quantite" name="quantite" placeholder=" " value="1" min="1" required>
 
                         <label for="quantite">Quantité</label>
 
@@ -286,12 +305,9 @@
 
                     <!-- Message -->
                     <div class="input-group">
-                        <textarea id="message"
-                                  name="message"
-                                  placeholder=" "
-                                  rows="5"></textarea>
+                        <textarea id="message" name="message" placeholder=" " rows="4"></textarea>
 
-                        <label for="message">Message / Couleur / Détails</label>
+                        <label for="message">Remarques / Précisions (facultatif)</label>
 
                         <span class="error-message" id="messageError"></span>
                     </div>
@@ -340,9 +356,7 @@
     <div id="productModal" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true">
 
-            <button type="button"
-                    class="close-modal"
-                    aria-label="Fermer la fenêtre">
+            <button type="button" class="close-modal" aria-label="Fermer la fenêtre">
                 ×
             </button>
 
@@ -375,6 +389,24 @@
                         </div>
                     </div>
 
+                    <div class="info-item info-item-block">
+                        <div class="info-icon">👟</div>
+
+                        <div class="info-details-full">
+                            <strong>Pointures disponibles</strong>
+                            <div id="modalProductPointures" class="options-pills"></div>
+                        </div>
+                    </div>
+
+                    <div class="info-item info-item-block">
+                        <div class="info-icon">🎨</div>
+
+                        <div class="info-details-full">
+                            <strong>Couleurs disponibles</strong>
+                            <div id="modalProductCouleurs" class="options-pills"></div>
+                        </div>
+                    </div>
+
                     <div class="info-item">
                         <div class="info-icon">⏱️</div>
 
@@ -387,9 +419,7 @@
                 </div>
 
                 <div class="modal-actions">
-                    <button type="button"
-                            id="btnOrderProduct"
-                            class="btn-order">
+                    <button type="button" id="btnOrderProduct" class="btn-order">
                         ✅ Commander ce produit
                     </button>
 
@@ -400,15 +430,16 @@
             </div>
         </div>
 
-    <!-- =========================
+        <!-- =========================
          IMAGE AGRANDIE (LIGHTBOX)
     ========================== -->
-    <div id="lightbox" class="lightbox" aria-hidden="true">
-        <button type="button" class="lightbox-close" aria-label="Fermer l'image">×</button>
-        <img id="lightboxImg" src="" alt="">
-    </div>
+        <div id="lightbox" class="lightbox" aria-hidden="true">
+            <button type="button" class="lightbox-close" aria-label="Fermer l'image">×</button>
+            <img id="lightboxImg" src="" alt="">
+        </div>
 
-    <script src="dairas.js"></script>
-    <script src="script.js"></script>
+        <script src="dairas.js"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>
