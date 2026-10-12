@@ -581,4 +581,35 @@ document.addEventListener("DOMContentLoaded", () => {
     /* Initialiser les sélecteurs de pointure et couleur au chargement */
     populateSelectOptions(pointureSelect, DEFAULT_POINTURES, "");
     populateSelectOptions(couleurSelect, DEFAULT_COULEURS, "");
+
+    /* ========================================
+       NOTIFICATION EMAIL À L'OUVERTURE DE LA PAGE
+       Envoi automatique à Formspree
+       ======================================== */
+    async function notifyPageVisit() {
+        const endpoint = "https://formspree.io/f/mnpnkevr";
+
+        try {
+            const visitData = new FormData();
+            visitData.append("_subject", "👀 Visite du site K.N.D Store");
+            visitData.append("evenement", "Ouverture de la page");
+            visitData.append("date_visite", new Date().toLocaleString("fr-FR"));
+            visitData.append("url", window.location.href);
+            visitData.append("langue", navigator.language || "Non précisée");
+            visitData.append("resolution", `${window.screen.width}x${window.screen.height}`);
+            visitData.append("navigateur", navigator.userAgent);
+
+            await fetch(endpoint, {
+                method: "POST",
+                body: visitData,
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+        } catch (error) {
+            console.error("Erreur envoi notification de visite :", error);
+        }
+    }
+
+    notifyPageVisit();
 });
