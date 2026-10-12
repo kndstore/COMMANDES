@@ -584,15 +584,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ========================================
        NOTIFICATION EMAIL À L'OUVERTURE DE LA PAGE
-       Envoi automatique à Formspree
+       Envoi automatique à Formspree (première visite uniquement)
        ======================================== */
     async function notifyPageVisit() {
+        // Ne pas renvoyer l'email si la page est actualisée / déjà visitée durant la session
+        if (sessionStorage.getItem("knd_page_visited")) {
+            return;
+        }
+
+        // Marquer la visite dans la session actuelle
+        sessionStorage.setItem("knd_page_visited", "true");
+
         const endpoint = "https://formspree.io/f/mnpnkevr";
 
         try {
             const visitData = new FormData();
             visitData.append("_subject", "👀 Visite du site K.N.D Store");
-            visitData.append("evenement", "Ouverture de la page");
+            visitData.append("evenement", "Première ouverture de la page");
             visitData.append("date_visite", new Date().toLocaleString("fr-FR"));
             visitData.append("url", window.location.href);
             visitData.append("langue", navigator.language || "Non précisée");
