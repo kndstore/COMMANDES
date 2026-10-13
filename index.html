@@ -126,13 +126,19 @@
                 </div>
 
                 <!--
-                    ENDPOINT FORMSPREE :
-                    https://formspree.io/f/mnpnkevr
+                    ENDPOINT WEB3FORMS :
+                    https://api.web3forms.com/submit
                 -->
-                <form id="orderForm" action="https://formspree.io/f/mnpnkevr" method="POST">
+                <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
+
+                    <!-- Clé d'accès Web3Forms -->
+                    <input type="hidden" name="access_key" value="3bf13307-0e73-4190-9b2f-f93e5db9852c">
 
                     <!-- Sujet affiché dans l'email reçu -->
-                    <input type="hidden" name="_subject" value="Nouvelle commande - K.N.D Store">
+                    <input type="hidden" name="subject" value="Nouvelle commande - K.N.D Store">
+
+                    <!-- Nom expéditeur -->
+                    <input type="hidden" name="from_name" value="K.N.D Store">
 
                     <!-- Source de la commande -->
                     <input type="hidden" name="source" value="Site web K.N.D Store">

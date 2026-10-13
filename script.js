@@ -474,9 +474,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* ========================================
-       ENVOI FORMSPREE
+       ENVOI WEB3FORMS
        Endpoint :
-       https://formspree.io/f/mnpnkevr
+       https://api.web3forms.com/submit
        ======================================== */
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -514,13 +514,26 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const formData = new FormData(form);
 
+            /* S'assurer que la clé Web3Forms est présente */
+            if (!formData.get("access_key")) {
+                formData.append("access_key", "3bf13307-0e73-4190-9b2f-f93e5db9852c");
+            }
+            if (!formData.get("subject")) {
+                formData.append("subject", "Nouvelle commande - K.N.D Store");
+            }
+            if (!formData.get("from_name")) {
+                formData.append("from_name", "K.N.D Store");
+            }
+
             /* Ajouter la date d'envoi à l'email reçu */
             formData.append(
                 "date_commande",
                 new Date().toLocaleString("fr-FR")
             );
 
-            const response = await fetch(form.action, {
+            const endpoint = form.action || "https://api.web3forms.com/submit";
+
+            const response = await fetch(endpoint, {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -528,7 +541,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            if (response.ok) {
+            const data = await response.json().catch(() => null);
+
+            if (response.ok && (!data || data.success)) {
                 form.reset();
 
                 produitInput.value = "";
@@ -549,18 +564,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     block: "center"
                 });
             } else {
-                let errorText = "Erreur lors de l'envoi. Réessayez plus tard.";
+                let errorText = (data && data.message) ? data.message : "Erreur lors de l'envoi. Réessayez plus tard.";
 
-                try {
-                    const data = await response.json();
-
-                    if (data.errors && data.errors.length > 0) {
-                        errorText = data.errors
-                            .map((error) => error.message)
-                            .join(" ");
-                    }
-                } catch (jsonError) {
-                    console.error("Erreur lecture réponse Formspree :", jsonError);
+                if (data && data.errors && data.errors.length > 0) {
+                    errorText = data.errors
+                        .map((err) => (typeof err === "string" ? err : err.message || JSON.stringify(err)))
+                        .join(" ");
                 }
 
                 showFormError(errorText);
@@ -584,7 +593,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ========================================
        NOTIFICATION EMAIL À L'OUVERTURE DE LA PAGE
-       Envoi automatique à Formspree (première visite uniquement)
+       Envoi automatique à Web3Forms (première visite uniquement)
        ======================================== */
     async function notifyPageVisit() {
         // Ne pas renvoyer l'email si la page est actualisée / déjà visitée durant la session
@@ -595,11 +604,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Marquer la visite dans la session actuelle
         sessionStorage.setItem("knd_page_visited", "true");
 
-        const endpoint = "https://formspree.io/f/mnpnkevr";
+        const endpoint = "https://api.web3forms.com/submit";
 
         try {
             const visitData = new FormData();
-            visitData.append("_subject", "👀 Visite du site K.N.D Store");
+            visitData.append("access_key", "3bf13307-0e73-4190-9b2f-f93e5db9852c");
+            visitData.append("subject", "👀 Visite du site K.N.D Store");
+            visitData.append("from_name", "K.N.D Store Bot");
             visitData.append("evenement", "Première ouverture de la page");
             visitData.append("date_visite", new Date().toLocaleString("fr-FR"));
             visitData.append("url", window.location.href);
