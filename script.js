@@ -578,7 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur de connexion :", error);
 
             showFormError(
-                "Impossible d'envoyer la commande. Vérifiez votre connexion Internet."
+                 "La commande a peut-être été envoyée, mais nous n’avons pas pu confirmer l’envoi. Vérifiez votre connexion ou réessayez."
             );
         } finally {
             submitButton.disabled = false;
