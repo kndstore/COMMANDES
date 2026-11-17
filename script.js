@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let modalSelectedPointure = null;
     let modalSelectedCouleur = null;
 
-    const DEFAULT_POINTURES = ["39", "40", "41", "42", "43", "44", "45"];
+   
     const DEFAULT_COULEURS = [
         "Noir",
         "Marron",
